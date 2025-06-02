@@ -16,7 +16,7 @@ public class Dashboard extends JFrame {
         summaryPanel.add(new JLabel("Transaksi Hari Ini: -"));
         add(summaryPanel, BorderLayout.NORTH);
 
-         JPanel navPanel = new JPanel(new GridLayout(2, 4, 10, 10)); // kasih jarak antar tombol
+        JPanel navPanel = new JPanel(new GridLayout(2, 4, 10, 10));
         JButton pelangganBtn = new JButton("Pelanggan");
         JButton bookingBtn = new JButton("Booking");
         JButton komputerBtn = new JButton("Komputer");

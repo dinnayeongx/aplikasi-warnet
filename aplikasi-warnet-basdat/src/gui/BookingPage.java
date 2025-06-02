@@ -1,4 +1,3 @@
-// gui/BookingPage.java
 package gui;
 
 import java.awt.*;
@@ -38,7 +37,6 @@ public class BookingPage extends JFrame {
         add(formPanel, BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);
 
-        // ActionListeners
         simpanBtn.addActionListener(e -> JOptionPane.showMessageDialog(this, "Booking disimpan"));
         batalBtn.addActionListener(e -> this.dispose()); // tutup window
     }

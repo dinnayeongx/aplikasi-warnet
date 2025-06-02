@@ -1,4 +1,3 @@
-// gui/TransaksiPage.java
 package gui;
 
 import java.awt.*;
@@ -51,7 +50,6 @@ public class TransaksiPage extends JFrame {
         add(formPanel, BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);
 
-        // ActionListeners
         simpanBtn.addActionListener(e -> JOptionPane.showMessageDialog(this, "Transaksi disimpan"));
         batalBtn.addActionListener(e -> this.dispose());
     }

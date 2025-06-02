@@ -27,7 +27,6 @@ public class LaporanPage extends JFrame {
         add(filterPanel, BorderLayout.NORTH);
         add(scrollPane, BorderLayout.CENTER);
 
-        // ActionListeners
         exportPDF.addActionListener(e -> JOptionPane.showMessageDialog(this, "Export PDF clicked untuk periode: " + periodeCombo.getSelectedItem()));
         exportExcel.addActionListener(e -> JOptionPane.showMessageDialog(this, "Export Excel clicked untuk periode: " + periodeCombo.getSelectedItem()));
 

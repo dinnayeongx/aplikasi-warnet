@@ -37,7 +37,6 @@ public class PelangganPage extends JFrame {
         add(formPanel, BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);
 
-        // ActionListeners
         tambahBtn.addActionListener(e -> JOptionPane.showMessageDialog(this, "Tambah Pelanggan clicked"));
         editBtn.addActionListener(e -> JOptionPane.showMessageDialog(this, "Edit Pelanggan clicked"));
         hapusBtn.addActionListener(e -> JOptionPane.showMessageDialog(this, "Hapus Pelanggan clicked"));

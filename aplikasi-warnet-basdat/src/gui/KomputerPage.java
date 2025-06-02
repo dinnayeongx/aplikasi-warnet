@@ -1,4 +1,3 @@
-// gui/KomputerPage.java
 package gui;
 
 import java.awt.*;
@@ -38,7 +37,6 @@ public class KomputerPage extends JFrame {
         add(formPanel, BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);
 
-        // ActionListeners
         tambahBtn.addActionListener(e -> JOptionPane.showMessageDialog(this, "Tambah Komputer clicked"));
         editBtn.addActionListener(e -> JOptionPane.showMessageDialog(this, "Edit Komputer clicked"));
         hapusBtn.addActionListener(e -> JOptionPane.showMessageDialog(this, "Hapus Komputer clicked"));

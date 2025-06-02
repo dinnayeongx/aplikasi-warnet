@@ -1,4 +1,3 @@
-// gui/LayananPage.java
 package gui;
 
 import java.awt.*;
@@ -38,7 +37,6 @@ public class LayananPage extends JFrame {
         add(formPanel, BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);
 
-        // ActionListeners
         tambahBtn.addActionListener(e -> JOptionPane.showMessageDialog(this, "Tambah Layanan clicked"));
         editBtn.addActionListener(e -> JOptionPane.showMessageDialog(this, "Edit Layanan clicked"));
         hapusBtn.addActionListener(e -> JOptionPane.showMessageDialog(this, "Hapus Layanan clicked"));
