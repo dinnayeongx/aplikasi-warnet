@@ -106,8 +106,9 @@ public class BookingPage extends JFrame {
             while (rs.next()) {
                 int id = rs.getInt("ID");
                 String nama = rs.getString("nama");
-                pelangganComboBox.addItem(nama);
-                pelangganMap.put(nama, id);
+                String label = id + " - " + nama;
+                pelangganComboBox.addItem(label);
+                pelangganMap.put(label, id);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Gagal memuat pelanggan: " + e.getMessage());
@@ -121,8 +122,9 @@ public class BookingPage extends JFrame {
             while (rs.next()) {
                 int id = rs.getInt("ID");
                 String spec = rs.getString("spesifikasi");
-                komputerComboBox.addItem(spec);
-                komputerMap.put(spec, id);
+                String label = id + " - " + spec;
+                komputerComboBox.addItem(label);
+                komputerMap.put(label, id);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Gagal memuat komputer: " + e.getMessage());
@@ -144,13 +146,21 @@ public class BookingPage extends JFrame {
             Timestamp waktuMulai = new Timestamp(fullFormat.parse(tanggal + " " + mulai).getTime());
             Timestamp waktuSelesai = new Timestamp(fullFormat.parse(tanggal + " " + selesai).getTime());
 
+            String selectedPelanggan = (String) pelangganComboBox.getSelectedItem();
+            String selectedKomputer = (String) komputerComboBox.getSelectedItem();
+
+            if (selectedPelanggan == null || selectedKomputer == null) {
+                JOptionPane.showMessageDialog(this, "Pelanggan atau Komputer belum dipilih!");
+                return;
+            }
+
             stmt.setString(1, bookingId);
             stmt.setString(2, (String) statusComboBox.getSelectedItem());
             stmt.setDate(3, java.sql.Date.valueOf(tanggal));
             stmt.setTimestamp(4, waktuMulai);
             stmt.setTimestamp(5, waktuSelesai);
-            stmt.setInt(6, pelangganMap.get((String) pelangganComboBox.getSelectedItem()));
-            stmt.setInt(7, komputerMap.get((String) komputerComboBox.getSelectedItem()));
+            stmt.setInt(6, pelangganMap.get(selectedPelanggan));
+            stmt.setInt(7, komputerMap.get(selectedKomputer));
 
             stmt.executeUpdate();
             JOptionPane.showMessageDialog(this, "Booking berhasil disimpan!");
