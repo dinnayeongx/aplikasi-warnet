@@ -7,6 +7,10 @@ import javax.swing.*;
 import javax.swing.text.DateFormatter;
 
 public class BookingPage extends JFrame {
+    private JTextField idField;
+    private JComboBox<String> pelangganComboBox;
+    private JComboBox<String> komputerComboBox;
+
     public BookingPage() {
         setTitle("Booking Komputer");
         setSize(500, 350);
@@ -34,24 +38,31 @@ public class BookingPage extends JFrame {
 
             JComponent field;
 
-            if (label.equals("Tanggal Booking:")) {
+            if (label.equals("ID:")) {
+                idField = new JTextField();
+                field = idField;
+            } else if (label.equals("Tanggal Booking:")) {
                 SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
                 DateFormatter df = new DateFormatter(format);
                 JFormattedTextField dateField = new JFormattedTextField(df);
-                dateField.setValue(new Date()); // default ke hari ini
+                dateField.setValue(new Date());
                 field = dateField;
             } else if (label.contains("Waktu")) {
                 SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
                 DateFormatter tf = new DateFormatter(timeFormat);
                 JFormattedTextField timeField = new JFormattedTextField(tf);
-                timeField.setToolTipText("Format: HH:mm"); // optional
-                timeField.setText("HH:mm"); // placeholder (tidak akan hilang otomatis)
+                timeField.setToolTipText("Format: HH:mm");
+                timeField.setText("HH:mm");
                 timeField.setForeground(Color.GRAY);
                 field = timeField;
             } else if (label.contains("Status")) {
                 field = new JComboBox<>(new String[]{"Pending", "Confirmed", "Cancelled"});
-            } else if (label.contains("Pelanggan") || label.contains("Komputer")) {
-                field = new JComboBox<>();
+            } else if (label.contains("Pelanggan")) {
+                pelangganComboBox = new JComboBox<>(new String[]{"Pelanggan 1", "Pelanggan 2"});
+                field = pelangganComboBox;
+            } else if (label.contains("Komputer")) {
+                komputerComboBox = new JComboBox<>(new String[]{"Komputer 1", "Komputer 2"});
+                field = komputerComboBox;
             } else {
                 field = new JTextField();
             }
@@ -71,7 +82,23 @@ public class BookingPage extends JFrame {
         add(formPanel, BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);
 
-        simpanBtn.addActionListener(e -> JOptionPane.showMessageDialog(this, "Booking disimpan"));
-        batalBtn.addActionListener(e -> this.dispose()); // tutup window
+        simpanBtn.addActionListener(e -> {
+            String bookingId = idField.getText().trim();
+            if (bookingId.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "ID Booking tidak boleh kosong!");
+                return;
+            }
+            // TODO: Simpan data booking ke DB di sini
+
+            JOptionPane.showMessageDialog(this, "Booking disimpan");
+
+            // Buka TransaksiPage dengan bookingId
+            new TransaksiPage(bookingId);
+
+            // Tutup BookingPage
+            this.dispose();
+        });
+
+        batalBtn.addActionListener(e -> this.dispose());
     }
 }
