@@ -1,6 +1,5 @@
 package gui;
 
-import db.DBConnection;
 import java.awt.*;
 import java.sql.*;
 import javax.swing.*;
@@ -82,7 +81,7 @@ public class PelangganPage extends JFrame {
             }
 
             try (Connection conn = DBConnection.getConnection()) {
-                String sql = "INSERT INTO Pelanggan (nama, email, no_hp, total_kunjungan) VALUES (?, ?, ?, 0)";
+                String sql = "INSERT INTO Pelanggan (nama, email, nomorHP, total_kunjungan) VALUES (?, ?, ?, 0)";
                 PreparedStatement ps = conn.prepareStatement(sql);
                 ps.setString(1, nama);
                 ps.setString(2, email);
@@ -113,7 +112,7 @@ public class PelangganPage extends JFrame {
             }
 
             try (Connection conn = DBConnection.getConnection()) {
-                String sql = "UPDATE Pelanggan SET nama = ?, email = ?, no_hp = ? WHERE id = ?";
+                String sql = "UPDATE Pelanggan SET nama = ?, email = ?, nomorHP = ? WHERE ID = ?";
                 PreparedStatement ps = conn.prepareStatement(sql);
                 ps.setString(1, nama);
                 ps.setString(2, email);
@@ -144,7 +143,7 @@ public class PelangganPage extends JFrame {
             if (confirm != JOptionPane.YES_OPTION) return;
 
             try (Connection conn = DBConnection.getConnection()) {
-                String sql = "DELETE FROM Pelanggan WHERE id = ?";
+                String sql = "DELETE FROM Pelanggan WHERE ID = ?";
                 PreparedStatement ps = conn.prepareStatement(sql);
                 ps.setString(1, id);
                 int deleted = ps.executeUpdate();
@@ -177,16 +176,16 @@ public class PelangganPage extends JFrame {
 
     private void refreshTableFromDB() {
         try (Connection conn = DBConnection.getConnection()) {
-            String sql = "SELECT id, nama, email, no_hp, total_kunjungan FROM Pelanggan ORDER BY id";
+            String sql = "SELECT ID, nama, email, nomorHP, total_kunjungan FROM Pelanggan ORDER BY ID";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             tableModel.setRowCount(0);
             while (rs.next()) {
                 Object[] row = {
-                    rs.getString("id"),
+                    rs.getString("ID"),
                     rs.getString("nama"),
                     rs.getString("email"),
-                    rs.getString("no_hp"),
+                    rs.getString("nomorHP"),
                     rs.getInt("total_kunjungan")
                 };
                 tableModel.addRow(row);
