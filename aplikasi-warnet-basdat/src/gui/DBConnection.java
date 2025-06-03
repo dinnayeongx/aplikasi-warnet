@@ -1,9 +1,5 @@
-<<<<<<<< HEAD:aplikasi-warnet-basdat/src/gui/DBConnection.java
 package gui;
-========
-package db;
 
->>>>>>>> master:aplikasi-warnet-basdat/src/db/DBConnection.java
 import java.sql.Connection;
 import java.sql.DriverManager;
 
