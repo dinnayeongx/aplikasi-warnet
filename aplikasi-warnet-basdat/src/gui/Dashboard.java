@@ -20,14 +20,12 @@ public class Dashboard extends JFrame {
         JButton pelangganBtn = new JButton("Pelanggan");
         JButton bookingBtn = new JButton("Booking");
         JButton komputerBtn = new JButton("Komputer");
-        JButton transaksiBtn = new JButton("Transaksi");
         JButton layananBtn = new JButton("Layanan");
         JButton laporanBtn = new JButton("Laporan");
 
         navPanel.add(pelangganBtn);
         navPanel.add(bookingBtn);
         navPanel.add(komputerBtn);
-        navPanel.add(transaksiBtn);
         navPanel.add(layananBtn);
         navPanel.add(laporanBtn);
         add(navPanel, BorderLayout.CENTER);
@@ -41,10 +39,6 @@ public class Dashboard extends JFrame {
 
         komputerBtn.addActionListener(e -> {
             new KomputerPage().setVisible(true);
-        });
-
-        transaksiBtn.addActionListener(e -> {
-            new TransaksiPage().setVisible(true);
         });
 
         layananBtn.addActionListener(e -> {
