@@ -54,3 +54,4 @@ public class TransaksiPage extends JFrame {
         batalBtn.addActionListener(e -> this.dispose());
     }
 }
+
