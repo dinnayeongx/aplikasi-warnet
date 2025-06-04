@@ -133,10 +133,9 @@ public class BookingPage extends JFrame {
 
     private void simpanBooking() {
         try (Connection conn = DBConnection.getConnection()) {
-            String sql = "INSERT INTO Booking (ID, status_booking, tanggal_booking, waktu_mulai, waktu_selesai, pelanggan_id, komputer_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            String sql = "INSERT INTO Booking (status_booking, tanggal_booking, waktu_mulai, waktu_selesai, pelanggan_id, komputer_id) VALUES (?, ?, ?, ?, ?, ?)";
+            PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-            String bookingId = idField.getText().trim();
             String tanggal = tanggalField.getText();
             String mulai = waktuMulaiField.getText();
             String selesai = waktuSelesaiField.getText();
@@ -154,18 +153,25 @@ public class BookingPage extends JFrame {
                 return;
             }
 
-            stmt.setString(1, bookingId);
-            stmt.setString(2, (String) statusComboBox.getSelectedItem());
-            stmt.setDate(3, java.sql.Date.valueOf(tanggal));
-            stmt.setTimestamp(4, waktuMulai);
-            stmt.setTimestamp(5, waktuSelesai);
-            stmt.setInt(6, pelangganMap.get(selectedPelanggan));
-            stmt.setInt(7, komputerMap.get(selectedKomputer));
+            stmt.setString(1, (String) statusComboBox.getSelectedItem());
+            stmt.setDate(2, java.sql.Date.valueOf(tanggal));
+            stmt.setTimestamp(3, waktuMulai);
+            stmt.setTimestamp(4, waktuSelesai);
+            stmt.setInt(5, pelangganMap.get(selectedPelanggan));
+            stmt.setInt(6, komputerMap.get(selectedKomputer));
 
             stmt.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Booking berhasil disimpan!");
 
-            new TransaksiPage(bookingId);
+            // Ambil ID yang baru di-generate
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()) {
+                int generatedId = rs.getInt(1);
+                JOptionPane.showMessageDialog(this, "Booking berhasil disimpan dengan ID: " + generatedId);
+                new TransaksiPage(String.valueOf(generatedId));
+            } else {
+                JOptionPane.showMessageDialog(this, "Booking disimpan, tapi ID tidak dapat diambil.");
+            }
+
             this.dispose();
 
         } catch (Exception e) {

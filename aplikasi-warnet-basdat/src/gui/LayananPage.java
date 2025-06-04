@@ -56,7 +56,7 @@ public class LayananPage extends JFrame {
 
     private void tambahLayanan() {
         try (Connection conn = DBConnection.getConnection()) {
-            String sql = "INSERT INTO Layanan (id, nama, harga, durasi) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO Layanan (ID, nama_layanan, harga, durasi) VALUES (?, ?, ?, ?)";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, Integer.parseInt(txtId.getText()));
             stmt.setString(2, txtNama.getText());
@@ -72,7 +72,7 @@ public class LayananPage extends JFrame {
 
     private void editLayanan() {
         try (Connection conn = DBConnection.getConnection()) {
-            String sql = "UPDATE Layanan SET nama = ?, harga = ?, durasi = ? WHERE id = ?";
+            String sql = "UPDATE Layanan SET nama_layanan = ?, harga = ?, durasi = ? WHERE ID = ?";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, txtNama.getText());
             stmt.setDouble(2, Double.parseDouble(txtHarga.getText()));
@@ -92,7 +92,7 @@ public class LayananPage extends JFrame {
 
     private void hapusLayanan() {
         try (Connection conn = DBConnection.getConnection()) {
-            String sql = "DELETE FROM Layanan WHERE id = ?";
+            String sql = "DELETE FROM Layanan WHERE ID = ?";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, Integer.parseInt(txtId.getText()));
             int rows = stmt.executeUpdate();
